@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments</title>
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div>
+    <nav>
+        <ul>
+            <li> <a href="/"> Home </a> </li>
+            <li> <a href="/about_me"> About Me </a> </li>
+            <li> <a href="/contact"> Contact </a> </li>
+            <li> <a href="/books"> Books </a> </li>
+            <li> <a href="/book_over"> Book Overview </a> </li>
+            <li> <a href="/com"> Comments </a> </li>
+            <li> <a href="/book_char"> Book Characters </a> </li>
+            <li> <a href="/book_char"> Blog </a> </li>
+        </ul>
+    </nav>
+</div>
+<h1> Comments: </h1>
+<form action="{{ url_for('com') }}" method="POST" class="form1">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+  <br>
+  <label for="comment">Comment:</label>
+  <textarea id="comment" name="comment" required></textarea>
+  <br>
+  <input type="submit" value="Submit">
+</form>
+{% for comment in comments %}
+<div class="comment" style="background-color: #808080; color: #FFFFFF; padding: 10px;">
+<p> Name: {{ comment.author }}                                                 Comment:  {{ comment.text }}</p>
+</div>
+{% endfor %}
+
+
+
+    {% for comment in comments %}
+        <div class="comment">
+            <p> Name: {{ comment.author }}                                                 Comment:  {{ comment.text }}</p>
+            <form action="/delete_comment/{{ comment.id }}" method="post">
+                <input type="submit" value="Delete">
+            </form>
+        </div>
+    {% endfor %}
+
+</body>
+</html>
+<!--The HTML code snippet you provided is a <form> element in HTML, which is used to create a form on a web page. The action attribute specifies the URL where the form data will be submitted, and the method attribute specifies the HTTP method to be used for the form submission.-->
+
+<!--In your code, url_for('com') is a Flask function that generates a URL for the specified endpoint (in this case, 'com'). The URL generated will correspond to the route or view function in your Flask application that handles the form submission.-->
+
+<!--The method attribute is set to "POST", which means that the form data will be sent in the body of the HTTP request. This is commonly used when you want to submit sensitive data or when the form submission can have side effects on the server.-->
+
+<!--Overall, this form is configured to submit its data to a specific URL using the HTTP POST method. Depending on your Flask application, you need to have a corresponding route or view function that handles the form submission and performs the necessary actions.-->
